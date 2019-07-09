@@ -2,34 +2,30 @@ from pathlib import Path as path
 import json
 import random
 
-# create two lists of potential games: the file path and the user-facing title
-game_paths = []
-game_titles = []
+# Create two lists of potential games: the file path and the user-facing title.
+games = []
+
 p = path(".")
 for i in p.glob("*.json"):
-    game_paths.append(str(i))
 
     with open(i, "r") as f:
-        game_titles.append(json.loads(f.read()).get("title"))
-
+        games.append(json.loads(f.read()))
 
 # show the user the available titles and have them select one
 print("Here are the available games")
 
-for id, game in enumerate(game_titles):
-    print("%s: %s" % (id, game))
+for id, game in enumerate(games):
+    print("%s: %s" % (id, game.get("title")))
 
 whichGame = int(input("which game number would you like to play?\n"))
 
 # load the contents of the selected game file, or a random file if there's user error
-if whichGame < len(game_titles):
+if whichGame < len(games):
     print("Nice choice!\n")
-    with open(str(game_paths[whichGame]), "r") as f:
-        data_loaded = json.loads(f.read())
+    data_loaded = games[whichGame]
 else:
     print("I'll just pick one for you...\n")
-    with open(str(random.choice(game_paths)), "r") as f:
-        data_loaded = json.loads(f.read())
+    data_loaded = random.choice(games)
 
 description = data_loaded.get("desc", "something interesting")
 print("\nOkay! Let's find out %s\nbased on your answers to a few simple questions...\n" % (description))
