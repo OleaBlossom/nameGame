@@ -2,7 +2,7 @@ from pathlib import Path as path
 import json
 import random
 
-# Create two lists of potential games: the file path and the user-facing title.
+# Create a list of potential games.
 games = []
 
 p = path(".")
@@ -11,28 +11,27 @@ for i in p.glob("*.json"):
     with open(i, "r") as f:
         games.append(json.loads(f.read()))
 
-# show the user the available titles and have them select one
+# Show the user the available titles and have them select one.
 print("Here are the available games")
 
-for id, game in enumerate(games):
-    print("%s: %s" % (id, game.get("title")))
+for n, game in enumerate(games):
+    print("%s: %s" % (n, game.get("title")))
 
-whichGame = int(input("which game number would you like to play?\n"))
+user_selection = int(input("which game number would you like to play?\n"))
 
-# load the contents of the selected game file, or a random file if there's user error
-if whichGame < len(games):
+# Allow the user to select a game, or choose a random file.
+if user_selection < len(games):
     print("Nice choice!\n")
-    data_loaded = games[whichGame]
+    selected_game = games[user_selection]
 else:
     print("I'll just pick one for you...\n")
-    data_loaded = random.choice(games)
+    selected_game = random.choice(games)
 
-description = data_loaded.get("desc", "something interesting")
+description = selected_game.get("desc", "something interesting")
 print("\nOkay! Let's find out %s\nbased on your answers to a few simple questions...\n" % (description))
 
-randomCapital = chr(random.randint(65, 90))
 results = []
-questions = data_loaded.get("inputQuestions")
+questions = selected_game.get("inputQuestions")
 
 for entry in questions:
     q = entry.get("question")
@@ -43,17 +42,19 @@ for entry in questions:
 
     # For a question that expects a "character" result type,
     # use only the first letter of the given answer to build the name.
-    # If there's user error, find the result from a random character
+    # If something goes wrong, find the result from a random character.
     if entry.get("type") == "character":
-        c = answer.upper()[0]
-        results.append(result.get(c,
-                                  result.get(randomCapital)))
+        single_char = answer.upper()[0]
+        random_capital = chr(random.randint(65, 90))
+        default = result.get(random_capital)
+        results.append(result.get(single_char, default))
 
-    # for all other types, try to find the result from the exact answer given
-    # if the answer given doesn't exist, choose a random result
+    # For all other types, try to find the result from the exact answer given.
+    # If the answer given doesn't exist, choose a random result.
     else:
-        results.append(result.get(answer, result.get(
-            random.choice(list(result)))))
+        result_list = list(result)
+        random_result = result.get(random.choice(result_list))
+        results.append(result.get(answer, random_result))
 
-# print the result for the user
-print(data_loaded.get("output") + " ".join(results))
+# Print the result for the user.
+print(selected_game.get("output") + " ".join(results))
