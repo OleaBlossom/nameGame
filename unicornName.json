@@ -1,0 +1,71 @@
+{
+    "title": "Unicorn Name",
+    "desc": "what your Unicorn Name is",
+    "output": "Your colourful Unicorn Name is: ",
+    "inputQuestions": [
+        {
+            "question": "What is your first name?",
+            "type": "character",
+            "result": {
+                "A": "Electra",
+                "B": "Pacer",
+                "C": "Acer",
+                "D": "Elita",
+                "E": "Strider",
+                "F": "Cracker",
+                "G": "Romper",
+                "H": "Dancer",
+                "I": "Whinny",
+                "J": "Racer",
+                "K": "Walker",
+                "L": "Chaser",
+                "M": "Snowy",
+                "N": "Ranger",
+                "O": "Stroller",
+                "P": "Airy",
+                "Q": "Forester",
+                "R": "Mystica",
+                "S": "Celestia",
+                "T": "HotHoof",
+                "U": "Trotter",
+                "V": "Leaper",
+                "W": "Prancer",
+                "X": "Jumper",
+                "Y": "Deva",
+                "Z": "Tinker"
+            }
+        },
+        {
+            "question": "What is your last name?",
+            "type": "character",
+            "result": {
+                "A": "The Bold",
+                "B": "The Fiery",
+                "C": "The Silent",
+                "D": "The Brave",
+                "E": "The Gentle",
+                "F": "The Eternal",
+                "G": "The Blessed",
+                "H": "The Noble",
+                "I": "The Chosen",
+                "J": "The Daring",
+                "K": "The Swift",
+                "L": "The Quiet",
+                "M": "The Strong",
+                "N": "The Solitary",
+                "O": "The Passionate",
+                "P": "The Creative",
+                "Q": "The Watchful",
+                "R": "The Knowing",
+                "S": "The Hopeful",
+                "T": "The Untamed",
+                "U": "The Playful",
+                "V": "The Truthful",
+                "W": "The Fearless",
+                "X": "The Truthful",
+                "Y": "The Powerful",
+                "Z": "The Cheerful"
+            }
+        }
+    ]
+}
