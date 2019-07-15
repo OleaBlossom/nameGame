@@ -39,7 +39,7 @@
             "question": "What is your last name?",
             "type": "character",
             "result": {
-                "A": "The Game",
+                "A": "Game",
                 "B": "Bros",
                 "C": "Souls",
                 "D": "Time",
