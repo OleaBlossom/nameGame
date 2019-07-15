@@ -16,7 +16,7 @@ def load_games(game_path="."):
     return games
 
 
-def play_game(games):
+def select_game(games):
 
     # Show the user the available titles and have them select one.
     print("Here are the available games")
@@ -33,6 +33,9 @@ def play_game(games):
     else:
         print("I'll just pick one for you...\n")
         selected_game = random.choice(games)
+    return selected_game
+
+def play_game(selected_game):
 
     description = selected_game.get("desc", "something interesting")
     print("\nOkay! Let's find out %s\nbased on your answers to a few simple questions...\n" % (description))
@@ -70,4 +73,5 @@ def play_game(games):
 if __name__ == "__main__":
 
     games = load_games()
-    play_game(games)
+    selected_game = select_game(games)
+    play_game(selected_game)
