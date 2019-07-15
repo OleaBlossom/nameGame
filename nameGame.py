@@ -67,11 +67,13 @@ def play_game(selected_game):
             results.append(result.get(answer, random_result))
 
     # Print the result for the user.
-    print(selected_game.get("output") + " ".join(results))
+    result = selected_game.get("output") + " ".join(results)
+    return result
 
 
 if __name__ == "__main__":
 
     games = load_games()
     selected_game = select_game(games)
-    play_game(selected_game)
+    print(play_game(selected_game))
+    
