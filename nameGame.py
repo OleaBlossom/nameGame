@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 from pathlib import Path as path
 import json
 import random
@@ -15,6 +17,16 @@ def load_games(game_path="."):
             games.append(json.loads(f.read()))
     return games
 
+def user_integer_selection(message):
+    while True:
+        try:
+            user_input = int(input(message))
+        except ValueError:
+            print("Please input a number between 1 and 5 😅")
+            continue
+        else:
+            return user_input
+            break
 
 def select_game(games):
 
@@ -22,9 +34,10 @@ def select_game(games):
     print("Here are the available games")
 
     for n, game in enumerate(games):
-        print("%s: %s" % (n, game.get("title")))
+        print("%s: %s" % (n + 1, game.get("title")))
 
-    user_selection = int(input("which game number would you like to play?\n"))
+    message = "which game number would you like to play?\n"
+    user_selection = user_integer_selection(message) - 1
 
     # Allow the user to select a game, or choose a random file.
     if user_selection < len(games):
@@ -72,7 +85,7 @@ def play_game(selected_game):
 
 
 if __name__ == "__main__":
-
+    
     games = load_games()
     selected_game = select_game(games)
     print(play_game(selected_game))
